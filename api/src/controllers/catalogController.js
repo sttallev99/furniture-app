@@ -4,9 +4,14 @@ const User = require('../models/User');
 const furnitureService = require('../services/furnitureService');
 
 router.get('/', async(req, res) => {
-    let furniture = await furnitureService.getAll();
+    if(req.query.where) {
+        let furniture = await furnitureService.getOwn(req.user._id);
+        res.json(furniture);
+    } else {
+        let furniture = await furnitureService.getAll();
+        res.json(furniture);
+    }
 
-    res.json(furniture)
 });
 
 router.post('/', async(req, res) => {

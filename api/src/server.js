@@ -12,6 +12,8 @@ mongoose.connect('mongodb://localhost:27017/furniture')
         console.log('DB Connected!')
     });
 
+app.use(express.urlencoded({extended: true}));
+
 app.use(express.json());
 
 app.use(auth);
